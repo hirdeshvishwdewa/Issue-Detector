@@ -23,4 +23,22 @@ export class IssueService {
   async updateIssueState(id: number, entity: Issue) {
     return await this.issueRepository.Update(id, entity);
   }
+
+  async getIssueTypesAndCounts(): Promise<{ type: string, count: number }[]> {
+    const issues = await this.getIssues(); // Assuming you have a method to get all issues
+    const issueCounts = issues.reduce((acc: { [key: string]: number }, issue: Issue) => {
+      acc[issue.type] = (acc[issue.type] || 0) + 1;
+      return acc;
+    }, {});
+
+    return Object.keys(issueCounts).map(type => ({
+      type,
+      count: issueCounts[type]
+    }));
+  }
+
+  async getIssuesByType(type: string): Promise<Issue[]> {
+    const issues = await this.getIssues(); // Assuming you have a method to get all issues
+    return issues.filter(issue => issue.type === type);
+  }
 }

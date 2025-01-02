@@ -12,4 +12,23 @@ export class IssueController {
       res.status(500).json({ message: error });
     }
   }
+  
+  async getIssueTypesAndCounts(req: Request, res: Response): Promise<void> {
+    try {
+      const issueTypesAndCounts = await issueService.getIssueTypesAndCounts();
+      res.status(200).json(issueTypesAndCounts);
+    } catch (error: any) {
+      res.status(500).json({ message: error });
+    }
+  }
+
+  async getIssuesByType(req: Request, res: Response): Promise<void> {
+    try {
+      const { type } = req.params;
+      const issues = await issueService.getIssuesByType(type);
+      res.status(200).json(issues);
+    } catch (error: any) {
+      res.status(500).json({ message: error });
+    }
+  }
 }
