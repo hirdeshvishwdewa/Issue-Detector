@@ -3,6 +3,7 @@ import { AppDataSource } from "./config/data-source";
 import { ExpressConfig } from "./config/express.config";
 import logger from "./config/logger.config";
 import { appRoutes } from "./routes/routes";
+import './scheduler/config';
 
 const main = async () => {
   const ORM = await AppDataSource.initialize();

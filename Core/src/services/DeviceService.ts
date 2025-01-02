@@ -1,3 +1,4 @@
+import { Device } from "../entities/Device";
 import { DeviceRepository } from "../repositories/DeviceRepository";
 
 export class DeviceService {
@@ -9,5 +10,9 @@ export class DeviceService {
 
   async getDevices() {
     return await this.deviceRepository.findAll();
+  }
+
+  async updateDeviceState(id: number, entity: Device) {
+    return await this.deviceRepository.Update(id, entity);
   }
 }

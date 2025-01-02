@@ -4,14 +4,6 @@ import { BaseRepository } from './BaseRepository';
 
 export class DeviceRepository extends BaseRepository<Device> {
   constructor() {
-    super(AppDataSource.getRepository(Device));
-  }
-
-  async findByState(state: string): Promise<Device[]> {
-    return await this.repository.findBy({ state });
-  }
-
-  async findAll(): Promise<Device[]> {
-    return await this.repository.find();
+    super(Device);
   }
 }
