@@ -1,5 +1,5 @@
 import logger from "../config/logger.config";
-import { AppDataSource } from "../config/data-source.config";
+import { AppDataSource } from "../config/dataSource.config";
 import { seedDevices } from "./device.seed";
 
 const runSeeds = async () => {
