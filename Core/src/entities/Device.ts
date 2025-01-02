@@ -1,16 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { BaseEntity } from './BaseEntity';
 
 @Entity()
-export class Device {
+export class Device extends BaseEntity {
     @PrimaryGeneratedColumn('uuid')
-    id!: string;
+    deviceId!: string;
 
     @Column()
     state!: string;
-
-    @CreateDateColumn({ type: 'timestamptz' })
-    createdAt!: Date;
-
-    @UpdateDateColumn({ type: 'timestamptz' })
-    updatedAt!: Date;
 }

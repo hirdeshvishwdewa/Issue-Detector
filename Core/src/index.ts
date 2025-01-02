@@ -1,10 +1,16 @@
+import express from "express";
+import { AppDataSource } from "./config/data-source";
+import { ExpressConfig } from "./config/express.config";
+import logger from "./config/logger.config";
+import { appRoutes } from "./routes/routes";
 
-import { AppDataSource } from './config/data-source';
-
-AppDataSource.initialize()
-  .then(() => {
-    console.log('Data Source has been initialized!');
-  })
-  .catch((err) => {
-    console.error('Error during Data Source initialization:', err);
-  });
+const main = async () => {
+  const ORM = await AppDataSource.initialize();
+  const app = express();
+  const Express = new ExpressConfig(app, appRoutes);
+  if (ORM.isInitialized) {
+    await Express.init();
+  }
+};
+logger.info("Starting application...");
+main();
