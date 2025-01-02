@@ -1,5 +1,5 @@
 import { EntityTarget, Repository } from 'typeorm';
-import { AppDataSource } from '../config/data-source';
+import { AppDataSource } from '../config/data-source.config';
 import { BaseEntity } from '../entities/BaseEntity';
 
 export abstract class BaseRepository<T extends BaseEntity> {

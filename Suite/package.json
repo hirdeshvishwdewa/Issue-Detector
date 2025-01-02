@@ -1,4 +1,8 @@
 {
+  "name": "issue-detector",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "dependencies": {
     "@types/node-cron": "^3.0.11",
     "body-parser": "^1.20.3",
@@ -21,21 +25,14 @@
     "typescript": "^5.7.2",
     "ts-node-dev": "^2.0.0"
   },
-  "name": "core",
-  "version": "1.0.0",
-  "main": "src/index.ts",
   "scripts": {
     "start": "node dist/server.js",
     "dev": "ts-node-dev --respawn src/index.ts",
     "build": "tsc",
     "typeorm": "ts-node ./node_modules/typeorm/cli.js",
-    "typeorm:generate": "npm run typeorm -- migration:generate -n UpdateDeviceEntity -d ./src/config/dataSource.config.ts",
     "typeorm:run": "npm run typeorm -- migration:run -d ./src/config/dataSource.config.ts",
-    "typeorm:revert": "npm run typeorm -- migration:revert -d ./src/config/dataSource.config.ts",
     "seed": "ts-node src/seeds/index.ts"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": ""
+  "author": "Hirdesh Vishwdewa",
+  "license": "ISC"
 }

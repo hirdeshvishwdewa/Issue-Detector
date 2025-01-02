@@ -1,5 +1,5 @@
 import express from "express";
-import { AppDataSource } from "./config/data-source";
+import { AppDataSource } from "./config/data-source.config";
 import { ExpressConfig } from "./config/express.config";
 import logger from "./config/logger.config";
 import { appRoutes } from "./routes/routes";

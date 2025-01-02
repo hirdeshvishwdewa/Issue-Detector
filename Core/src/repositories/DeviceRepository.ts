@@ -1,4 +1,3 @@
-import { AppDataSource } from '../config/data-source';
 import { Device } from '../entities/Device';
 import { BaseRepository } from './BaseRepository';
 
