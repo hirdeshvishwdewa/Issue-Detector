@@ -12,4 +12,8 @@ export class DatabaseBusinessDataFacade implements IBusinessDataFacade {
   async getTriggers() {
     return await this.triggerRepository.findAll();
   }
+
+  async getTriggerById(triggerId: string) {
+    return await this.triggerRepository.findByTriggerId(triggerId);
+  }
 }

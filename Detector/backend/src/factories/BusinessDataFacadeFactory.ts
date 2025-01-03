@@ -9,7 +9,7 @@ export class BusinessDataFacadeFactory {
             return new DatabaseBusinessDataFacade();
         } else if (mode === 'http') {
             const coreApi = new CoreApi({
-                baseURL: process.env.CORE_API_BASE_URL,
+                baseURL: process.env.SUIT_API_BASE_URL,
             });
             return new HttpBusinessDataFacade(coreApi);
         }

@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { format } from 'date-fns';
 import axios from 'axios';
 
 function Table({ issues }) {
+  const [issueList, setIssueList] = useState(issues);
+
   const handleButtonClick = (issueId) => {
-    axios.post(`http://localhost:4000/issues/${issueId}/action`)
+    axios.get(`http://localhost:4000/issues/${issueId}/resolved`)
       .then(response => {
+        if (response.data.resolved) {
+          setIssueList(issueList.filter(issue => issue.id !== issueId));
+        }
         console.log('Action performed:', response.data);
       })
       .catch(error => {
@@ -24,7 +29,7 @@ function Table({ issues }) {
         </tr>
       </thead>
       <tbody>
-        {issues.map(issue => (
+        {issueList.map(issue => (
           <tr key={issue.id}>
             <td className="py-2 px-4 border-b">{format(new Date(issue.createdAt), 'dd.MM.yyyy')}</td>
             <td className="py-2 px-4 border-b">{issue.type}</td>

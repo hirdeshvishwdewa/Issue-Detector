@@ -15,18 +15,12 @@ export class StatusMismatchIssueDetector {
         try {
             logger.info('Fetching Core devices');
             const devices = await this.coreApi.getCoreDevices();
-            const suitORM = await SuitDataSource.initialize();
-            if (!suitORM.isInitialized) {
-                logger.error('Failed to initialize Suit ORM');
-                return;
+            const triggers = await new TriggerService().getTriggers();
+            if (devices && triggers) {
+                const newMismatcheIssues = this.findNewStatusMismatchIssuesFromDevicesAndTriggers(devices, triggers);
+                newMismatcheIssues.map((issue: IIssue) => this.handleDeviceStatusMismatch(issue));
+                logger.info('StatusMismatchIssueDetector job executed successfully');
             }
-            const facade = BusinessDataFacadeFactory.create('db');
-            const triggerService = new TriggerService(facade);
-            const triggers = await triggerService.getTriggers();
-            suitORM.destroy();
-            const newMismatcheIssues = this.findNewStatusMismatchIssuesFromDevicesAndTriggers(devices, triggers);
-            newMismatcheIssues.map((issue: IIssue) => this.handleDeviceStatusMismatch(issue));
-            logger.info('StatusMismatchIssueDetector job executed successfully');
         } catch (err: any) {
             logger.error('Error fetching Core devices:', err);
         }

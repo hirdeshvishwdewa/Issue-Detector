@@ -5,7 +5,7 @@ import Sidebar from './components/Sidebar';
 import MainContent from './components/MainContent';
 
 function App() {
-  const [selectedType, setSelectedType] = useState(null);
+  const [selectedType, setSelectedType] = useState("status-mismatch");
 
   return (
     <div className="flex">

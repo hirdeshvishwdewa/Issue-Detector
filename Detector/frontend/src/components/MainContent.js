@@ -17,11 +17,13 @@ function MainContent({ selectedType }) {
         console.error('There was an error fetching the issues!', error);
       });
   }, [selectedType]);
-
-  const filteredIssues = issues.filter(issue =>
-    issue.type.toLowerCase().includes(filterText.toLowerCase()) ||
-    issue.status.toLowerCase().includes(filterText.toLowerCase())
-  );
+  let filteredIssues = issues;
+  if (filterText !== "") {
+    filteredIssues = issues.filter(issue =>
+      issue.type.toLowerCase().includes(filterText.toLowerCase()) ||
+      issue.status.toLowerCase().includes(filterText.toLowerCase())
+    );
+  }
 
   return (
     <div className="w-5/6 h-screen p-4 overflow-auto">

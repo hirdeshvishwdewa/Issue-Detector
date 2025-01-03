@@ -12,4 +12,32 @@ export class DeviceController {
       res.status(500).json({ message: error });
     }
   }
+
+  async getDeviceById(req: Request, res: Response): Promise<void> {
+    try {
+      const { id } = req.params;
+      const device = await deviceService.getDeviceById(Number(id));
+      if (device) {
+        res.status(200).json(device);
+      } else {
+        res.status(404).json({ message: "Device not found" });
+      }
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+    }
+  }
+
+  async getDeviceByDeviceId(req: Request, res: Response): Promise<void> {
+    try {
+      const { deviceId } = req.params;
+      const device = await deviceService.getDeviceByDeviceId(deviceId);
+      if (device) {
+        res.status(200).json(device);
+      } else {
+        res.status(404).json({ message: "Device not found" });
+      }
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+    }
+  }
 }

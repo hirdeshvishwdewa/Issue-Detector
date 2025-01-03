@@ -6,6 +6,7 @@ export const appRoutes = express.Router();
 
 const deviceController = new DeviceController();
 
-appRoutes.get('/devices', (req, res) => deviceController.getAllDevices(req, res));
+appRoutes.get('/devices', deviceController.getAllDevices.bind(deviceController));
+appRoutes.get('/devices/:deviceId', deviceController.getDeviceByDeviceId.bind(deviceController));
 
 logger.info('Device routes loaded');
